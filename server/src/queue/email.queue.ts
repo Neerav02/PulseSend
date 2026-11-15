@@ -1,18 +1,12 @@
 import { Queue, QueueEvents } from 'bullmq';
+import { getRedisConnection } from '../config/redis';
 import { env } from '../config/env';
 import { logger } from '../utils/logger';
 
 export const EMAIL_QUEUE_NAME = 'email-dispatch-queue';
 
-const connection = {
-  host: env.REDIS_HOST,
-  port: env.REDIS_PORT,
-  password: env.REDIS_PASSWORD || undefined,
-  maxRetriesPerRequest: null,
-};
-
 export const emailQueue = new Queue(EMAIL_QUEUE_NAME, {
-  connection,
+  connection: getRedisConnection() as any,
   defaultJobOptions: {
     attempts: 3,
     backoff: {
@@ -24,7 +18,9 @@ export const emailQueue = new Queue(EMAIL_QUEUE_NAME, {
   },
 });
 
-export const emailQueueEvents = new QueueEvents(EMAIL_QUEUE_NAME, { connection });
+export const emailQueueEvents = new QueueEvents(EMAIL_QUEUE_NAME, {
+  connection: getRedisConnection() as any,
+});
 
 emailQueueEvents.on('completed', ({ jobId }) => {
   logger.debug({ jobId }, 'BullMQ job completed');

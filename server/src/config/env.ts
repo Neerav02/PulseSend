@@ -13,6 +13,7 @@ const envSchema = z.object({
 
   DATABASE_URL: z.string().default('postgresql://postgres:postgres@localhost:5433/dispatch_db?schema=public'),
 
+  REDIS_URL: z.string().optional(),
   REDIS_HOST: z.string().default('localhost'),
   REDIS_PORT: z.string().default('6380').transform((val) => parseInt(val, 10)),
   REDIS_PASSWORD: z.string().optional(),

@@ -9,13 +9,7 @@ import { addEmailJobToQueue, EMAIL_QUEUE_NAME, EmailJobData } from './email.queu
 import { decrypt } from '../utils/encryption';
 import { logger } from '../utils/logger';
 import { EmailStatus } from '../config/database';
-
-const connection = {
-  host: env.REDIS_HOST,
-  port: env.REDIS_PORT,
-  password: env.REDIS_PASSWORD || undefined,
-  maxRetriesPerRequest: null,
-};
+import { getRedisConnection } from '../config/redis';
 
 export function startEmailWorker() {
   const worker = new Worker<EmailJobData>(
@@ -226,7 +220,7 @@ export function startEmailWorker() {
       }
     },
     {
-      connection,
+      connection: getRedisConnection() as any,
       concurrency: env.WORKER_CONCURRENCY,
     }
   );

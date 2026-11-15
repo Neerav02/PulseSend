@@ -33,11 +33,11 @@ describe('End-to-End Worker Execution & Delivery Pipeline', () => {
 
   afterAll(async () => {
     if (workerInstance) {
-      await workerInstance.close();
+      await workerInstance.close(true);
     }
     await prisma.$disconnect();
     redisClient.disconnect();
-  });
+  }, 15000);
 
   it('schedules an email, processes via BullMQ worker, and records Ethereal delivery in PostgreSQL', async () => {
     // Schedule for 1 second in the future
@@ -65,9 +65,9 @@ describe('End-to-End Worker Execution & Delivery Pipeline', () => {
     expect(createdEmails).toHaveLength(1);
     const emailId = createdEmails[0].id;
 
-    // Poll for worker completion (up to 15 seconds)
+    // Poll for worker completion (up to 25 seconds for external Ethereal SMTP)
     let finalEmail: any = null;
-    const maxWaitTime = 15000;
+    const maxWaitTime = 25000;
     const startTime = Date.now();
 
     while (Date.now() - startTime < maxWaitTime) {
@@ -86,6 +86,6 @@ describe('End-to-End Worker Execution & Delivery Pipeline', () => {
     expect(finalEmail.sentAt).toBeDefined();
     expect(finalEmail.etherealPreviewUrl).toBeDefined();
     expect(finalEmail.etherealPreviewUrl).toContain('ethereal.email');
-  }, 20000);
+  }, 35000);
 });
 
