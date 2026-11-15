@@ -35,22 +35,22 @@
     "pino": "^9.3.2",
     "pino-pretty": "^11.2.2",
     "uuid": "^10.0.0",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
+    "zod": "^3.23.8",
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^22.5.0",
     "@types/nodemailer": "^6.4.15",
-    "@types/supertest": "^6.0.2",
     "@types/uuid": "^10.0.0",
     "prisma": "^5.18.0",
-    "supertest": "^7.0.0",
     "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/supertest": "^6.0.2",
+    "supertest": "^7.0.0",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.5.4",
     "vitest": "^2.0.5"
   }
 }
