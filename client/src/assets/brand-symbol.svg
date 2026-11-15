@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" width="100%" height="100%">
+  <!-- Background Badge (Optional container) -->
+  <rect width="48" height="48" rx="12" fill="#151922" />
+  
+  <!-- Outer Scheduling Orbital Arc (Clockwise Momentum) -->
+  <path d="M 12 18 C 12 11.37 17.37 6 24 6 C 30.63 6 36 11.37 36 18" stroke="#FF5733" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="32" stroke-dashoffset="4" opacity="0.4" />
+  <circle cx="36" cy="18" r="2.5" fill="#FF5733" />
+
+  <!-- Aerodynamic Envelope Body -->
+  <path d="M 10 18 C 10 16.34 11.34 15 13 15 L 35 15 C 36.66 15 38 16.34 38 18 L 38 34 C 38 35.66 36.66 37 35 37 L 13 37 C 11.34 37 10 35.66 10 34 Z" fill="#1D2330" stroke="#2D3546" stroke-width="1.5" />
+  
+  <!-- Envelope Flap Creases -->
+  <path d="M 11 16 L 24 26 L 37 16" stroke="#3D475C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- The PulseSend Radiant Pulse Wave (Cutting through with delivery momentum) -->
+  <path d="M 8 28 L 16 28 L 20 20 L 25 34 L 29 25 L 33 28 L 40 28" stroke="#FF5733" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Pulse Spark Node -->
+  <circle cx="25" cy="34" r="2" fill="#FFFFFF" />
+</svg>

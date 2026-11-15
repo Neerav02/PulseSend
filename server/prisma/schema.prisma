@@ -1,0 +1,219 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum EmailStatus {
+  CREATED
+  SCHEDULED
+  QUEUED
+  PROCESSING
+  SENT
+  FAILED
+  RETRY_PENDING
+  RATE_LIMITED_DEFERRED
+  CANCELLED
+  DELIVERY_UNKNOWN
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  PROCESSING
+  COMPLETED
+  CANCELLED
+  PAUSED
+}
+
+model Tenant {
+  id                String             @id @default(uuid())
+  name              String
+  users             User[]
+  memberships       TenantMembership[]
+  senders           SenderAccount[]
+  campaigns         EmailCampaign[]
+  scheduledEmails   ScheduledEmail[]
+  slackIntegration  SlackIntegration?
+  auditLogs         AuditLog[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+}
+
+model User {
+  id             String             @id @default(uuid())
+  email          String             @unique
+  name           String
+  avatarUrl      String?
+  googleId       String?            @unique
+  role           UserRole           @default(MEMBER)
+  tenantId       String
+  tenant         Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  memberships    TenantMembership[]
+  campaigns      EmailCampaign[]
+  auditLogs      AuditLog[]
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([tenantId])
+}
+
+model TenantMembership {
+  id        String   @id @default(uuid())
+  userId    String
+  tenantId  String
+  role      UserRole @default(MEMBER)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, tenantId])
+}
+
+model SenderAccount {
+  id                     String           @id @default(uuid())
+  tenantId               String
+  tenant                 Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  email                  String
+  displayName            String
+  smtpHost               String           @default("smtp.ethereal.email")
+  smtpPort               Int              @default(587)
+  smtpUser               String
+  smtpPassword           String           // AES-256-GCM Encrypted
+  hourlyLimit            Int              @default(50)
+  currentHourSent        Int              @default(0)
+  currentHourWindowStart DateTime         @default(now())
+  isActive               Boolean          @default(true)
+  scheduledEmails        ScheduledEmail[]
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
+}
+
+model EmailCampaign {
+  id              String           @id @default(uuid())
+  tenantId        String
+  tenant          Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdById     String
+  createdBy       User             @relation(fields: [createdById], references: [id])
+  title           String
+  status          CampaignStatus   @default(SCHEDULED)
+  totalRecipients Int              @default(0)
+  sentCount       Int              @default(0)
+  failedCount     Int              @default(0)
+  scheduledAt     DateTime
+  scheduledEmails ScheduledEmail[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([tenantId, status])
+}
+
+model ScheduledEmail {
+  id                  String                 @id @default(uuid())
+  tenantId            String
+  tenant              Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  campaignId          String?
+  campaign            EmailCampaign?         @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  senderId            String
+  sender              SenderAccount          @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  recipientEmail      String
+  recipientName       String?
+  subject             String
+  bodyContent         String
+  status              EmailStatus            @default(SCHEDULED)
+  bullMqJobId         String?                @unique
+  scheduledAt         DateTime
+  deliveryAttempts    Int                    @default(0)
+  lastAttemptAt       DateTime?
+  sentAt              DateTime?
+  etherealPreviewUrl  String?
+  failureReason       String?
+  attempts            EmailDeliveryAttempt[]
+  queueEvents         QueueEvent[]
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+
+  @@index([status, scheduledAt])
+  @@index([tenantId, createdAt])
+  @@index([senderId, status])
+}
+
+model EmailDeliveryAttempt {
+  id               String         @id @default(uuid())
+  scheduledEmailId String
+  scheduledEmail   ScheduledEmail @relation(fields: [scheduledEmailId], references: [id], onDelete: Cascade)
+  attemptNumber    Int
+  status           String
+  smtpResponseCode String?
+  errorMessage     String?
+  durationMs       Int?
+  attemptedAt      DateTime       @default(now())
+
+  @@index([scheduledEmailId])
+}
+
+model SlackIntegration {
+  id                    String    @id @default(uuid())
+  tenantId              String    @unique
+  tenant                Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  slackTeamId           String
+  slackTeamName         String
+  slackChannelId        String?
+  slackChannelName      String?
+  accessTokenEncrypted  String    // AES-256-GCM Encrypted
+  botUserId             String?
+  notifyOnRateLimit     Boolean   @default(true)
+  notifyOnFailure       Boolean   @default(true)
+  lastNotifiedAt        DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  @@index([tenantId, createdAt])
+}
+
+model IdempotencyRecord {
+  id           String   @id @default(uuid())
+  key          String   @unique
+  responseCode Int
+  responseBody Json
+  createdAt    DateTime @default(now())
+  expiresAt    DateTime
+
+  @@index([key])
+}
+
+model QueueEvent {
+  id               String         @id @default(uuid())
+  scheduledEmailId String
+  scheduledEmail   ScheduledEmail @relation(fields: [scheduledEmailId], references: [id], onDelete: Cascade)
+  eventType        String
+  payload          Json?
+  recordedAt       DateTime       @default(now())
+
+  @@index([scheduledEmailId])
+}

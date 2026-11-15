@@ -1,0 +1,11 @@
+email,name,company
+alex.vance@blackmesa.org,Alex Vance,Black Mesa
+gordon.freeman@blackmesa.org,Gordon Freeman,Black Mesa
+elena.rostova@datadog.com,Elena Rostova,Datadog
+marcus.aurelius@stripe.com,Marcus Aurelius,Stripe
+sarah.connor@cyberdyne.io,Sarah Connor,Cyberdyne Systems
+alex.vance@blackmesa.org,Duplicate Alex,Black Mesa
+invalid-recipient-without-domain,Bad Lead,Nowhere
+lisa.su@amd.com,Lisa Su,AMD
+satya.nadella@microsoft.com,Satya Nadella,Microsoft
+sam.altman@openai.com,Sam Altman,OpenAI
