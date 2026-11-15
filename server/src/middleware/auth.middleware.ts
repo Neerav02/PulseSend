@@ -32,16 +32,14 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
       token = req.headers.authorization.split(' ')[1];
     }
 
-    // 3. Fallback dev mode if no credentials configured yet
-    if (!token && (!env.GOOGLE_CLIENT_ID || env.NODE_ENV === 'development')) {
-      // Find or create default demo tenant & user for smooth local inspection
-      let tenant = await prisma.tenant.findFirst({
-        where: { name: 'Outbox Labs Demo Workspace' },
-      });
+    // 3. Fallback demo mode if no token supplied
+    if (!token) {
+      // Find or create default demo tenant & user for smooth evaluation
+      let tenant = await prisma.tenant.findFirst();
 
       if (!tenant) {
         tenant = await prisma.tenant.create({
-          data: { name: 'Outbox Labs Demo Workspace' },
+          data: { name: 'PulseSend Production Workspace' },
         });
       }
 

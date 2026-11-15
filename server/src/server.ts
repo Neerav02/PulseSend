@@ -6,6 +6,7 @@ import { reconciliationService } from './services/reconciliation.service';
 import { startEmailWorker } from './queue/email.worker';
 import { prisma, initDatabase } from './config/database';
 import { redisClient } from './config/redis';
+import { encrypt } from './utils/encryption';
 import { logger } from './utils/logger';
 
 async function bootstrap() {
@@ -13,6 +14,69 @@ async function bootstrap() {
 
   // 0. Initialize PostgreSQL Tables and DDL
   await initDatabase();
+
+  // 0.5. Seed Default Tenant & Senders if database is fresh
+  try {
+    let defaultTenant = await prisma.tenant.findFirst();
+    if (!defaultTenant) {
+      defaultTenant = await prisma.tenant.create({
+        data: { name: 'PulseSend Production Workspace' },
+      });
+      logger.info('Created default production workspace');
+    }
+
+    const existingSender = await prisma.senderAccount.findFirst({
+      where: { tenantId: defaultTenant.id },
+    });
+    if (!existingSender) {
+      const sampleSenders = [
+        {
+          displayName: 'PulseSend Enterprise Growth',
+          email: 'outreach@pulsesend.io',
+          hourlyLimit: 50,
+          smtpHost: 'smtp.ethereal.email',
+          smtpPort: 587,
+          smtpUser: 'ethereal_user_sales',
+          smtpPassword: encrypt('demo_password_123'),
+        },
+        {
+          displayName: 'PulseSend Partnerships',
+          email: 'partnerships@pulsesend.io',
+          hourlyLimit: 60,
+          smtpHost: 'smtp.ethereal.email',
+          smtpPort: 587,
+          smtpUser: 'ethereal_user_partnerships',
+          smtpPassword: encrypt('demo_password_123'),
+        },
+        {
+          displayName: 'PulseSend Scale Engine',
+          email: 'scale@pulsesend.io',
+          hourlyLimit: 50,
+          smtpHost: 'smtp.ethereal.email',
+          smtpPort: 587,
+          smtpUser: 'ethereal_user_growth',
+          smtpPassword: encrypt('demo_password_123'),
+        },
+      ];
+      for (const s of sampleSenders) {
+        await prisma.senderAccount.create({
+          data: {
+            tenantId: defaultTenant.id,
+            displayName: s.displayName,
+            email: s.email,
+            hourlyLimit: s.hourlyLimit,
+            smtpHost: s.smtpHost,
+            smtpPort: s.smtpPort,
+            smtpUser: s.smtpUser,
+            smtpPassword: s.smtpPassword,
+          },
+        });
+      }
+      logger.info('Pre-seeded sample sender mailboxes for live evaluation.');
+    }
+  } catch (err) {
+    logger.warn({ err }, 'Auto-seed check encountered non-fatal error');
+  }
 
   // 1. Initialize Ethereal SMTP transport
   await etherealService.init();
