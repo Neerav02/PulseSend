@@ -25,3 +25,4 @@ redisClient.on('error', (err) => {
 });
 
 export const getRedisConnection = () => new Redis(redisOptions);
+

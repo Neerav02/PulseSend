@@ -59,3 +59,4 @@ volumes:
     name: pulsesend_redis_data
   elasticsearch_data:
     name: pulsesend_elasticsearch_data
+

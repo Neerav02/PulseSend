@@ -74,3 +74,4 @@ export const FuelGaugeCard: React.FC<FuelGaugeCardProps> = ({
     </div>
   );
 };
+

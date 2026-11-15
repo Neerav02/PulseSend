@@ -46,3 +46,4 @@ apiRouter.delete('/integrations/slack', authMiddleware, (req, res) => slackContr
 // Analytics & Dashboard Telemetry (Guarded)
 // ==========================================
 apiRouter.get('/analytics/dashboard', authMiddleware, (req, res) => analyticsController.getDashboardStats(req, res));
+

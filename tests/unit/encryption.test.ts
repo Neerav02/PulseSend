@@ -18,3 +18,4 @@ describe('AES-256-GCM Encryption Engine', () => {
     expect(decrypt('')).toBe('');
   });
 });
+

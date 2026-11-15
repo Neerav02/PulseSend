@@ -44,3 +44,4 @@ export class SlackController {
 }
 
 export const slackController = new SlackController();
+

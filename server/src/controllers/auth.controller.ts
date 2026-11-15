@@ -10,8 +10,32 @@ export class AuthController {
    */
   async googleLogin(req: Request, res: Response) {
     if (!env.GOOGLE_CLIENT_ID) {
-      // Mock dev login when credentials are not yet supplied
-      logger.info('Google OAuth credentials not configured. Redirecting with dev session.');
+      // Mock dev login when Google credentials are not yet supplied
+      logger.info('Google OAuth credentials not configured in .env. Signing in as default demo user.');
+
+      let user = await prisma.user.findFirst();
+      if (user) {
+        const sessionToken = jwt.sign(
+          {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            avatarUrl: user.avatarUrl,
+            tenantId: user.tenantId,
+            role: user.role,
+          },
+          env.SESSION_SECRET,
+          { expiresIn: '7d' }
+        );
+
+        res.cookie('pulsesend_session', sessionToken, {
+          httpOnly: true,
+          secure: env.NODE_ENV === 'production',
+          sameSite: 'lax',
+          maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+      }
+
       return res.redirect(`${env.FRONTEND_URL}/dashboard?dev=true`);
     }
 

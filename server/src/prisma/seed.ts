@@ -90,3 +90,4 @@ seed().catch((err) => {
   logger.error({ err }, 'Seeding failed');
   process.exit(1);
 });
+

@@ -164,3 +164,4 @@ export class ElasticsearchService {
 }
 
 export const elasticsearchService = new ElasticsearchService();
+

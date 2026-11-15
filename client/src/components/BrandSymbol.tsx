@@ -83,3 +83,4 @@ export const BrandSymbol: React.FC<BrandSymbolProps> = ({
     </div>
   );
 };
+

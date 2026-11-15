@@ -44,7 +44,7 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose, onS
             setSelectedSenderId(res.data.data[0].id);
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   }, [isOpen]);
 
@@ -55,10 +55,10 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose, onS
     recipientMode === 'csv'
       ? parsedRecipients
       : manualRecipientsText
-          .split(/[\n,]/)
-          .map((e) => e.trim())
-          .filter((e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))
-          .map((email) => ({ email }));
+        .split(/[\n,]/)
+        .map((e) => e.trim())
+        .filter((e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))
+        .map((email) => ({ email }));
 
   // Live Dispatch Velocity Forecast Calculation
   const totalLeads = activeRecipients.length;
@@ -179,22 +179,20 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose, onS
                 <button
                   type="button"
                   onClick={() => setRecipientMode('csv')}
-                  className={`flex-1 py-1.5 text-[12px] font-bold rounded-md transition-all ${
-                    recipientMode === 'csv'
+                  className={`flex-1 py-1.5 text-[12px] font-bold rounded-md transition-all ${recipientMode === 'csv'
                       ? 'bg-white text-ink shadow-sm'
                       : 'text-ink-muted hover:text-ink'
-                  }`}
+                    }`}
                 >
                   CSV / File Upload
                 </button>
                 <button
                   type="button"
                   onClick={() => setRecipientMode('manual')}
-                  className={`flex-1 py-1.5 text-[12px] font-bold rounded-md transition-all ${
-                    recipientMode === 'manual'
+                  className={`flex-1 py-1.5 text-[12px] font-bold rounded-md transition-all ${recipientMode === 'manual'
                       ? 'bg-white text-ink shadow-sm'
                       : 'text-ink-muted hover:text-ink'
-                  }`}
+                    }`}
                 >
                   Manual Text Entry
                 </button>

@@ -55,3 +55,4 @@ Instead, **PulseSend** is crafted with an **Editorial Swiss-SaaS Aesthetic** (re
 * **Interactive Dynamics:**
   * The **Schedule New Outreach** button utilizes `box-shadow: 0 4px 14px rgba(255, 87, 51, 0.35)`. It is the unmistakable focal point of the entire application.
   * Approaching sender quotas (e.g. 45/50) dynamically shift from midnight ink to Radiant Persimmon with a luminous alert track.
+

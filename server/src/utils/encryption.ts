@@ -46,3 +46,4 @@ export function decrypt(encryptedText: string): string {
 
   return decrypted;
 }
+

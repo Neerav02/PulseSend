@@ -249,7 +249,7 @@ export const prisma = {
         createdAt: r.created_at,
       };
     },
-    findFirst: async (args: any) => {
+    findFirst: async (args?: any) => {
       let query = 'SELECT * FROM users';
       const values: any[] = [];
       if (args?.where?.tenantId) {
@@ -318,7 +318,7 @@ export const prisma = {
         createdAt: r.created_at,
       }));
     },
-    findFirst: async (args: any) => {
+    findFirst: async (args?: any) => {
       let query = 'SELECT * FROM sender_accounts WHERE tenant_id = $1';
       const values: any[] = [args.where.tenantId];
       let paramIdx = 2;
@@ -570,7 +570,7 @@ export const prisma = {
       };
     },
 
-    findFirst: async (args: any) => {
+    findFirst: async (args?: any) => {
       let query = `
         SELECT se.*, sa.email AS sender_email, sa.display_name AS sender_display_name
         FROM scheduled_emails se

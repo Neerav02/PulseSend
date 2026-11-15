@@ -92,7 +92,7 @@ export const Dashboard: React.FC = () => {
           >
             <RefreshCw size={16} />
           </button>
-          
+
           {/* THE 10% INTENTIONAL HIGHLIGHT ACTION BUTTON */}
           <button
             onClick={() => setIsComposeOpen(true)}
