@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import { LandingPage } from './pages/LandingPage';
 import { Dashboard } from './pages/Dashboard';
 import { Scheduled } from './pages/Scheduled';
 import { Sent } from './pages/Sent';
@@ -25,19 +26,24 @@ export const App: React.FC = () => {
 
   return (
     <Routes>
+      {/* Public Production Landing Page */}
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/landing" element={<LandingPage />} />
+
+      {/* Dedicated Login Screen */}
       <Route path="/login" element={<Login />} />
 
-      {/* Main Application Layout */}
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="scheduled" element={<Scheduled />} />
-        <Route path="sent" element={<Sent />} />
-        <Route path="senders" element={<Senders />} />
-        <Route path="settings/slack" element={<SlackSettings />} />
+      {/* Main Authenticated Application Layout */}
+      <Route element={<Layout />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/scheduled" element={<Scheduled />} />
+        <Route path="/sent" element={<Sent />} />
+        <Route path="/senders" element={<Senders />} />
+        <Route path="/settings/slack" element={<SlackSettings />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };

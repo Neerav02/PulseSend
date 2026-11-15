@@ -5,6 +5,7 @@ interface BrandSymbolProps {
   className?: string;
   showWordmark?: boolean;
   tagline?: boolean;
+  darkText?: boolean;
 }
 
 export const BrandSymbol: React.FC<BrandSymbolProps> = ({
@@ -12,6 +13,7 @@ export const BrandSymbol: React.FC<BrandSymbolProps> = ({
   className = '',
   showWordmark = false,
   tagline = false,
+  darkText = false,
 }) => {
   return (
     <div className={`flex items-center gap-3 ${className}`}>
@@ -70,11 +72,19 @@ export const BrandSymbol: React.FC<BrandSymbolProps> = ({
 
       {showWordmark && (
         <div className="flex flex-col">
-          <span className="font-extrabold text-[17px] tracking-tight text-white leading-none">
+          <span
+            className={`font-extrabold text-[18px] tracking-tight leading-none ${
+              darkText ? 'text-[#151922]' : 'text-white'
+            }`}
+          >
             Pulse<span className="text-highlight">Send</span>
           </span>
           {tagline && (
-            <span className="text-[11px] font-medium text-ink-subtle tracking-normal mt-1">
+            <span
+              className={`text-[11px] font-medium tracking-normal mt-1 ${
+                darkText ? 'text-[#5A6475]' : 'text-ink-subtle'
+              }`}
+            >
               Schedule smarter. Deliver reliably.
             </span>
           )}
