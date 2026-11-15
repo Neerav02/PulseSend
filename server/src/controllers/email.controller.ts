@@ -35,7 +35,7 @@ export class EmailController {
       title: validated.title,
       subject: validated.subject,
       bodyContent: validated.bodyContent,
-      recipients: validated.recipients,
+      recipients: validated.recipients as any,
       scheduledAt: new Date(validated.scheduledAt),
       minDelaySeconds: validated.minDelaySeconds,
       hourlyLimitOverride: validated.hourlyLimitOverride,
