@@ -75,10 +75,10 @@ export const Login: React.FC = () => {
         <div className="flex flex-col gap-2">
           <button
             onClick={handleDevBypass}
-            className="w-full bg-[#FF5733] hover:bg-[#e04826] text-white font-extrabold text-[14px] py-3.5 px-4 rounded-xl shadow-lg shadow-[#FF5733]/25 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5"
+            className="group w-full bg-[#FF5733] hover:bg-[#E84A26] active:bg-[#D43F1E] text-white font-extrabold text-[14px] py-3.5 px-4 rounded-xl border border-[#D94220] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_1px_2px_rgba(18,22,31,0.14)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_2px_5px_rgba(18,22,31,0.18)] active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.25)] flex items-center justify-center gap-2 transition-all duration-150 transform hover:-translate-y-[0.5px] active:translate-y-[0.5px]"
           >
             <span>Launch Developer Workspace</span>
-            <ArrowRight size={16} />
+            <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" />
           </button>
           <span className="text-[11px] text-[#5A6475]">
             Instant evaluation mode pre-seeded with sample campaign data.
@@ -104,7 +104,7 @@ export const Login: React.FC = () => {
 
       {/* Page Footer */}
       <div className="text-center text-[12px] text-[#5A6475]">
-        PulseSend © 2026 Outbox Labs Assessment • ReachInbox Intelligent Cold Email Infrastructure
+        PulseSend © 2026 • Intelligent Email Orchestration Platform
       </div>
     </div>
   );

@@ -29,21 +29,7 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#151922] font-sans selection:bg-[#FF5733] selection:text-white flex flex-col">
-      {/* 1. TOP ANNOUNCEMENT BANNER */}
-      <div className="bg-[#151922] text-white/90 text-[12px] font-medium py-2 px-4 text-center border-b border-white/10 flex items-center justify-center gap-2">
-        <span className="inline-flex items-center gap-1.5 bg-[#FF5733] text-white text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full">
-          Assessment
-        </span>
-        <span>Outbox Labs / ReachInbox.ai SDE Assignment • Production Engine Active</span>
-        <button
-          onClick={() => setIsAuthModalOpen(true)}
-          className="text-[#FF5733] hover:underline font-bold inline-flex items-center ml-1"
-        >
-          Launch Console <ChevronRight size={14} />
-        </button>
-      </div>
-
-      {/* 2. NAVIGATION BAR */}
+      {/* 1. NAVIGATION BAR */}
       <header className="sticky top-0 z-40 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-[#151922]/10 transition-all">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-8">
@@ -73,12 +59,6 @@ export const LandingPage: React.FC = () => {
 
           {/* Action CTAs */}
           <div className="flex items-center gap-3">
-            {/* Live Service Indicator */}
-            <div className="hidden lg:flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 px-3 py-1.5 rounded-full text-[12px] font-semibold text-emerald-800">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Cluster Live (PG + Redis + ES)</span>
-            </div>
-
             <button
               onClick={() => setIsAuthModalOpen(true)}
               className="text-[13px] font-bold text-[#151922] hover:text-[#FF5733] px-4 py-2 rounded-xl transition-colors"
@@ -88,23 +68,23 @@ export const LandingPage: React.FC = () => {
 
             <button
               onClick={() => setIsAuthModalOpen(true)}
-              className="bg-[#FF5733] hover:bg-[#e04826] text-white text-[13px] font-extrabold px-5 py-2.5 rounded-xl shadow-lg shadow-[#FF5733]/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2"
+              className="group relative bg-[#FF5733] hover:bg-[#E84A26] active:bg-[#D43F1E] text-white text-[13px] font-extrabold px-5 py-2.5 rounded-xl border border-[#D94220] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_1px_2px_rgba(18,22,31,0.12)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_2px_5px_rgba(18,22,31,0.16)] active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.25)] transition-all duration-150 transform hover:-translate-y-[0.5px] active:translate-y-[0.5px] flex items-center gap-2"
             >
               <span>Get Started</span>
-              <ArrowRight size={15} />
+              <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-0.5" />
             </button>
           </div>
         </div>
       </header>
 
-      {/* 3. HERO SECTION */}
-      <section className="relative pt-12 pb-20 px-6 overflow-hidden">
+      {/* 2. HERO SECTION */}
+      <section className="relative pt-16 pb-20 px-6 overflow-hidden">
         {/* Subtle Background Radial Pattern */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#FF5733]/5 to-transparent rounded-full blur-3xl pointer-events-none -z-10"></div>
 
         <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
           {/* Tag Pill */}
-          <div className="inline-flex items-center gap-2 bg-white border border-[#151922]/10 px-4 py-1.5 rounded-full shadow-sm mb-6">
+          <div className="inline-flex items-center gap-2 bg-white border border-[#151922]/10 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.04)] mb-6">
             <span className="w-2 h-2 rounded-full bg-[#FF5733]"></span>
             <span className="text-[12px] font-bold uppercase tracking-wider text-[#151922]">
               Next-Gen Cold Outreach Infrastructure
@@ -121,32 +101,32 @@ export const LandingPage: React.FC = () => {
 
           {/* Subtitle */}
           <p className="text-base sm:text-xl text-[#5A6475] max-w-2xl mt-6 leading-relaxed">
-            The high-throughput email scheduling platform designed for ReachInbox. Built with Redis
-            sorted-set delayed queues, distributed Lua rate-limiting, and zero cron dependency.
+            The high-throughput distributed email scheduling platform. Built with Redis
+            sorted-set delayed queues, atomic Lua rate-limiting, and zero cron dependency.
           </p>
 
           {/* Hero CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
             <button
               onClick={() => setIsAuthModalOpen(true)}
-              className="bg-[#151922] hover:bg-[#202634] text-white font-bold text-[15px] px-7 py-3.5 rounded-xl shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-3"
+              className="group bg-[#151922] hover:bg-[#1C222E] active:bg-[#0E1117] text-white font-bold text-[15px] px-7 py-3.5 rounded-xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_2px_4px_rgba(0,0,0,0.2)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_4px_8px_rgba(0,0,0,0.25)] active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)] transition-all duration-150 transform hover:-translate-y-[0.5px] active:translate-y-[0.5px] flex items-center gap-3"
             >
-              <Zap size={18} className="text-[#FF5733]" />
+              <Zap size={18} className="text-[#FF5733] transition-transform duration-200 group-hover:scale-110" />
               <span>Launch Control Deck</span>
-              <ArrowRight size={17} />
+              <ArrowRight size={17} className="transition-transform duration-200 group-hover:translate-x-0.5" />
             </button>
 
             <button
               onClick={handleDevBypass}
-              className="bg-white hover:bg-white/80 border border-[#151922]/15 text-[#151922] font-bold text-[15px] px-6 py-3.5 rounded-xl shadow-sm transition-all hover:border-[#151922]/30 flex items-center gap-2"
+              className="bg-white hover:bg-[#FAF8F5] active:bg-[#F2ECE4] border border-[#151922]/15 hover:border-[#151922]/30 text-[#151922] font-bold text-[15px] px-6 py-3.5 rounded-xl shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.08)] active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)] transition-all duration-150 flex items-center gap-2"
             >
-              <span>Instant Evaluator Demo</span>
+              <span>Instant Workspace Access</span>
               <ChevronRight size={16} />
             </button>
           </div>
 
           {/* Metric Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl w-full mt-14 bg-white/80 border border-[#151922]/10 rounded-2xl p-5 shadow-sm">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl w-full mt-14 bg-white/90 border border-[#151922]/10 rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
             <div className="flex flex-col">
               <span className="text-2xl font-black text-[#151922]">0.0 ms</span>
               <span className="text-[12px] font-semibold text-[#5A6475]">Cron Polling Delay</span>
@@ -166,8 +146,8 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
 
-        {/* 4. INTERACTIVE FLIGHT DECK PREVIEW */}
-        <div className="max-w-5xl mx-auto mt-16 bg-white border border-[#151922]/15 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+        {/* 3. INTERACTIVE FLIGHT DECK PREVIEW */}
+        <div className="max-w-5xl mx-auto mt-16 bg-white border border-[#151922]/15 rounded-3xl p-6 sm:p-8 shadow-xl relative">
           <div className="flex items-center justify-between pb-6 border-b border-[#151922]/10">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 rounded-full bg-red-400"></div>
@@ -276,7 +256,7 @@ export const LandingPage: React.FC = () => {
 
                 <div className="bg-[#151922] text-white p-5 rounded-2xl font-mono text-[11px] leading-relaxed flex flex-col gap-2">
                   <div className="text-amber-400 font-bold">// Atomic Quota Evaluator</div>
-                  <div className="text-white/60">EVAL ratelimit.lua 1 sales@reachinbox.ai</div>
+                  <div className="text-white/60">EVAL ratelimit.lua 1 sales@domain.com</div>
                   <div className="text-red-400">Limit: 50 | Current: 50 → BLOCKED</div>
                   <div className="text-amber-300">Rescheduled: 2026-11-15T20:00:00Z</div>
                   <div className="text-emerald-400">Slack Alert: Dispatched to #new-channel</div>
@@ -321,7 +301,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. CORE ARCHITECTURE FEATURES */}
+      {/* 4. CORE ARCHITECTURE FEATURES */}
       <section id="features" className="py-20 px-6 bg-white border-y border-[#151922]/10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -338,7 +318,7 @@ export const LandingPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1 */}
-            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-sm hover:border-[#FF5733]/40 transition-all">
+            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#151922] text-white flex items-center justify-center">
                 <Clock size={22} className="text-[#FF5733]" />
               </div>
@@ -349,7 +329,7 @@ export const LandingPage: React.FC = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-sm hover:border-[#FF5733]/40 transition-all">
+            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#151922] text-white flex items-center justify-center">
                 <ShieldCheck size={22} className="text-[#FF5733]" />
               </div>
@@ -360,7 +340,7 @@ export const LandingPage: React.FC = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-sm hover:border-[#FF5733]/40 transition-all">
+            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#151922] text-white flex items-center justify-center">
                 <Layers size={22} className="text-[#FF5733]" />
               </div>
@@ -371,7 +351,7 @@ export const LandingPage: React.FC = () => {
             </div>
 
             {/* Card 4 */}
-            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-sm hover:border-[#FF5733]/40 transition-all">
+            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#151922] text-white flex items-center justify-center">
                 <Database size={22} className="text-[#FF5733]" />
               </div>
@@ -382,7 +362,7 @@ export const LandingPage: React.FC = () => {
             </div>
 
             {/* Card 5 */}
-            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-sm hover:border-[#FF5733]/40 transition-all">
+            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#151922] text-white flex items-center justify-center">
                 <Radio size={22} className="text-[#FF5733]" />
               </div>
@@ -393,7 +373,7 @@ export const LandingPage: React.FC = () => {
             </div>
 
             {/* Card 6 */}
-            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-sm hover:border-[#FF5733]/40 transition-all">
+            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col gap-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#151922] text-white flex items-center justify-center">
                 <BarChart3 size={22} className="text-[#FF5733]" />
               </div>
@@ -406,7 +386,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. ZERO-CRON ARCHITECTURAL COMPARISON */}
+      {/* 5. ZERO-CRON ARCHITECTURAL COMPARISON */}
       <section id="zero-cron" className="py-20 px-6 bg-[#FAF8F5]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-14">
@@ -418,7 +398,7 @@ export const LandingPage: React.FC = () => {
             </h2>
           </div>
 
-          <div className="bg-white border border-[#151922]/15 rounded-3xl overflow-hidden shadow-xl">
+          <div className="bg-white border border-[#151922]/15 rounded-3xl overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#151922] text-white text-[13px] uppercase tracking-wider">
@@ -470,7 +450,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. FOOTER */}
+      {/* 6. FOOTER */}
       <footer className="mt-auto bg-[#151922] text-white py-12 px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <BrandSymbol size={32} showWordmark tagline />
@@ -478,19 +458,19 @@ export const LandingPage: React.FC = () => {
           <div className="text-[12px] text-white/50 text-center sm:text-right">
             <div>PulseSend © 2026 • Intelligent Email Orchestration Platform</div>
             <div className="text-white/40 mt-1">
-              Outbox Labs SDE Internship Assignment • Architected & Implemented by Neerav Babel
+              Architected & Engineered by Neerav Babel
             </div>
           </div>
         </div>
       </footer>
 
       {/* ========================================================================= */}
-      {/* 8. HIGH-CONVERTING INTERACTIVE SIGN-IN MODAL */}
+      {/* 7. HIGH-CONVERTING INTERACTIVE SIGN-IN MODAL */}
       {/* ========================================================================= */}
       {isAuthModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#151922]/60 backdrop-blur-md animate-in fade-in duration-200">
           <div
-            className="bg-white border border-[#151922]/20 rounded-3xl max-w-md w-full p-8 shadow-2xl relative animate-in zoom-in-95 duration-200 text-center flex flex-col gap-6"
+            className="bg-white border border-[#151922]/15 rounded-3xl max-w-md w-full p-8 shadow-2xl relative animate-in zoom-in-95 duration-200 text-center flex flex-col gap-6"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -519,7 +499,7 @@ export const LandingPage: React.FC = () => {
               {/* Real Google OAuth Button */}
               <button
                 onClick={handleGoogleLogin}
-                className="w-full bg-white hover:bg-[#FAF8F5] border border-[#151922]/20 text-[#151922] font-bold text-[14px] py-3.5 px-4 rounded-xl shadow-sm flex items-center justify-center gap-3 transition-all transform hover:-translate-y-0.5 hover:shadow-md"
+                className="w-full bg-white hover:bg-[#FAF8F5] active:bg-[#F2ECE4] border border-[#151922]/20 text-[#151922] font-bold text-[14px] py-3.5 px-4 rounded-xl shadow-[0_1px_2px_rgba(0,0,0,0.06)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.08)] active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-center gap-3 transition-all duration-150 transform hover:-translate-y-[0.5px] active:translate-y-[0.5px]"
               >
                 <svg width="20" height="20" viewBox="0 0 18 18">
                   <path
@@ -542,13 +522,13 @@ export const LandingPage: React.FC = () => {
                 <span>Continue with Google</span>
               </button>
 
-              {/* Instant Evaluation Workspace Bypass */}
+              {/* Instant Workspace Access Button */}
               <button
                 onClick={handleDevBypass}
-                className="w-full bg-[#FF5733] hover:bg-[#e04826] text-white font-extrabold text-[14px] py-3.5 px-4 rounded-xl shadow-lg shadow-[#FF5733]/25 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                className="group w-full bg-[#FF5733] hover:bg-[#E84A26] active:bg-[#D43F1E] text-white font-extrabold text-[14px] py-3.5 px-4 rounded-xl border border-[#D94220] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_1px_2px_rgba(18,22,31,0.14)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_2px_5px_rgba(18,22,31,0.18)] active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.25)] transition-all duration-150 transform hover:-translate-y-[0.5px] active:translate-y-[0.5px] flex items-center justify-center gap-2"
               >
-                <span>Launch Evaluation Deck</span>
-                <ArrowRight size={16} />
+                <span>Launch Production Console</span>
+                <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" />
               </button>
             </div>
 

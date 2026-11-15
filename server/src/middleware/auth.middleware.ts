@@ -52,7 +52,7 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
       if (!user) {
         user = await prisma.user.create({
           data: {
-            email: 'demo@outboxlabs.com',
+            email: 'neerav@pulsesend.io',
             name: 'Neerav Babel',
             avatarUrl: 'https://api.dicebear.com/7.x/initials/svg?seed=Neerav+Babel',
             role: 'OWNER',

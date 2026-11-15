@@ -103,7 +103,7 @@ export const Sent: React.FC = () => {
                     <td className="py-3.5 px-5 font-bold text-ink">{email.recipientEmail}</td>
                     <td className="py-3.5 px-5 text-ink-muted truncate max-w-sm">{email.subject}</td>
                     <td className="py-3.5 px-5 font-mono text-[12px] text-ink-muted">
-                      {email.senderEmail || email.sender?.email || 'sales@reachinbox.ai'}
+                      {email.senderEmail || email.sender?.email || 'outreach@pulsesend.io'}
                     </td>
                     <td className="py-3.5 px-5 font-mono text-[12px] text-ink">
                       {email.sentAt ? new Date(email.sentAt).toUTCString().slice(5, 25) : '—'}

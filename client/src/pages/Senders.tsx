@@ -92,9 +92,9 @@ export const Senders: React.FC = () => {
 
         <button
           onClick={() => setIsAdding(!isAdding)}
-          className="bg-highlight hover:bg-highlight-hover text-white font-bold text-[13px] px-4 py-2 rounded-lg shadow-highlight flex items-center gap-2 transition-all"
+          className="group relative bg-[#FF5733] hover:bg-[#E84A26] active:bg-[#D43F1E] text-white font-bold text-[13px] px-4 py-2 rounded-lg border border-[#D94220] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_1px_2px_rgba(18,22,31,0.12)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_2px_5px_rgba(18,22,31,0.16)] active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.25)] flex items-center gap-2 transition-all duration-150 transform hover:-translate-y-[0.5px] active:translate-y-[0.5px]"
         >
-          <Plus size={16} />
+          <Plus size={16} className={`transition-transform duration-200 ${isAdding ? 'rotate-45' : 'group-hover:rotate-90'}`} />
           <span>{isAdding ? 'Close Form' : 'Add Sender Mailbox'}</span>
         </button>
       </div>
@@ -123,7 +123,7 @@ export const Senders: React.FC = () => {
               <input
                 type="email"
                 required
-                placeholder="sales@reachinbox.ai"
+                placeholder="outreach@pulsesend.io"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-canvas border border-border-soft rounded-lg px-3 py-2 text-[13px] text-ink focus:outline-none focus:border-highlight"

@@ -96,9 +96,9 @@ export const Dashboard: React.FC = () => {
           {/* THE 10% INTENTIONAL HIGHLIGHT ACTION BUTTON */}
           <button
             onClick={() => setIsComposeOpen(true)}
-            className="bg-highlight hover:bg-highlight-hover text-white font-bold text-[13px] px-5 py-2.5 rounded-lg shadow-highlight flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
+            className="group relative bg-[#FF5733] hover:bg-[#E84A26] active:bg-[#D43F1E] text-white font-bold text-[13px] px-5 py-2.5 rounded-lg border border-[#D94220] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_1px_2px_rgba(18,22,31,0.12)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_2px_5px_rgba(18,22,31,0.16)] active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.25)] flex items-center gap-2 transition-all duration-150 transform hover:-translate-y-[0.5px] active:translate-y-[0.5px]"
           >
-            <Plus size={16} />
+            <Plus size={16} className="transition-transform duration-200 group-hover:rotate-90 text-white" />
             <span>Schedule New Outreach</span>
           </button>
         </div>
@@ -165,7 +165,7 @@ export const Dashboard: React.FC = () => {
                     <td className="py-3.5 px-5 font-bold text-ink">{email.recipientEmail}</td>
                     <td className="py-3.5 px-5 text-ink-muted truncate max-w-xs">{email.subject}</td>
                     <td className="py-3.5 px-5 text-ink-muted font-mono text-[12px]">
-                      {email.sender?.email || 'sales@reachinbox.ai'}
+                      {email.sender?.email || 'outreach@pulsesend.io'}
                     </td>
                     <td className="py-3.5 px-5">
                       <span className="font-mono text-[11px] font-bold px-2 py-0.5 rounded bg-canvas border border-border-soft">

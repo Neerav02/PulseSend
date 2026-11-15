@@ -126,7 +126,7 @@ export function startEmailWorker() {
 
       // 4. SMTP Transmission via Ethereal Email
       try {
-        const domain = sender.email.split('@')[1] || 'outboxlabs.com';
+        const domain = sender.email.split('@')[1] || 'pulsesend.io';
         const customMessageId = `<pulsesend-${email.id}@${domain}>`;
 
         const smtpResult = await etherealService.sendEmail(

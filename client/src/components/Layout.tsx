@@ -135,7 +135,7 @@ export const Layout: React.FC = () => {
             )}
             <div className="flex flex-col truncate">
               <span className="text-[12px] font-bold text-white truncate">{user?.name || 'Neerav Babel'}</span>
-              <span className="text-[10px] text-ink-subtle truncate">{user?.email || 'admin@outboxlabs.com'}</span>
+              <span className="text-[10px] text-ink-subtle truncate">{user?.email || 'neerav@pulsesend.io'}</span>
             </div>
           </div>
 

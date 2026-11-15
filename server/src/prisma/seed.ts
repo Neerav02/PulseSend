@@ -39,8 +39,8 @@ async function seed() {
   // 3. Create Sample Sender Mailboxes
   const sampleSenders = [
     {
-      displayName: 'ReachInbox Enterprise Sales',
-      email: 'sales@reachinbox.ai',
+      displayName: 'PulseSend Enterprise Growth',
+      email: 'outreach@pulsesend.io',
       hourlyLimit: 50,
       smtpHost: 'smtp.ethereal.email',
       smtpPort: 587,
@@ -48,8 +48,8 @@ async function seed() {
       smtpPassword: encrypt('demo_password_123'),
     },
     {
-      displayName: 'Outbox Labs Partnerships',
-      email: 'partnerships@outboxlabs.com',
+      displayName: 'PulseSend Partnerships',
+      email: 'partnerships@pulsesend.io',
       hourlyLimit: 60,
       smtpHost: 'smtp.ethereal.email',
       smtpPort: 587,
@@ -57,8 +57,8 @@ async function seed() {
       smtpPassword: encrypt('demo_password_123'),
     },
     {
-      displayName: 'ReachInbox Growth',
-      email: 'growth@reachinbox.ai',
+      displayName: 'PulseSend Scale Engine',
+      email: 'scale@pulsesend.io',
       hourlyLimit: 50,
       smtpHost: 'smtp.ethereal.email',
       smtpPort: 587,

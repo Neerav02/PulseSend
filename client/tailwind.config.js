@@ -39,9 +39,11 @@ export default {
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
-        card: '0 2px 10px rgba(0, 0, 0, 0.02)',
-        'card-hover': '0 6px 18px rgba(0, 0, 0, 0.04)',
-        highlight: '0 4px 14px rgba(255, 87, 51, 0.35)',
+        card: '0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02)',
+        'card-hover': '0 4px 12px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04)',
+        highlight: 'inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 1px 2px rgba(18, 22, 31, 0.12)',
+        'highlight-hover': 'inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 2px 5px rgba(18, 22, 31, 0.16)',
+        'highlight-active': 'inset 0 1px 2px rgba(0, 0, 0, 0.25)',
       }
     },
   },

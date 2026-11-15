@@ -124,9 +124,9 @@ export const SlackSettings: React.FC = () => {
               <button
                 onClick={handleSendTest}
                 disabled={isSendingTest}
-                className="bg-highlight hover:bg-highlight-hover text-white font-bold text-[13px] px-5 py-2.5 rounded-lg shadow-highlight flex items-center gap-2 transition-all"
+                className="group relative bg-[#FF5733] hover:bg-[#E84A26] active:bg-[#D43F1E] disabled:opacity-50 text-white font-bold text-[13px] px-5 py-2.5 rounded-lg border border-[#D94220] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_1px_2px_rgba(18,22,31,0.12)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_2px_5px_rgba(18,22,31,0.16)] active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.25)] flex items-center gap-2 transition-all duration-150 transform hover:-translate-y-[0.5px] active:translate-y-[0.5px]"
               >
-                <Send size={15} />
+                <Send size={15} className="transition-transform duration-200 group-hover:translate-x-0.5" />
                 <span>{isSendingTest ? 'Sending Verification...' : 'Send Test Slack Alert'}</span>
               </button>
             </div>
