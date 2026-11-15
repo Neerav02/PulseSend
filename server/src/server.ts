@@ -3,6 +3,7 @@ import { env } from './config/env';
 import { etherealService } from './services/ethereal.service';
 import { elasticsearchService } from './services/elasticsearch.service';
 import { reconciliationService } from './services/reconciliation.service';
+import { startEmailWorker } from './queue/email.worker';
 import { prisma, initDatabase } from './config/database';
 import { redisClient } from './config/redis';
 import { logger } from './utils/logger';
@@ -21,6 +22,12 @@ async function bootstrap() {
 
   // 3. Boot-time Queue Reconciliation (Recovers pending jobs without cron)
   await reconciliationService.reconcileQueueOnStartup();
+
+  // 3.5. Start BullMQ Email Worker fleet
+  if (process.env.RUN_WORKER !== 'false') {
+    startEmailWorker();
+    logger.info('⚙️ PulseSend BullMQ Worker Fleet active');
+  }
 
   // 4. Start HTTP Server
   const server = app.listen(env.PORT, () => {
