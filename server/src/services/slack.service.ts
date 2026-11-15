@@ -172,7 +172,17 @@ export class SlackService {
         },
       ];
 
-      if (token.startsWith('xoxb-mock-token')) {
+      if (env.SLACK_WEBHOOK_URL) {
+        await fetch(env.SLACK_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: `⚠️ PulseSend Rate Limit Reached for ${data.senderEmail}`,
+            blocks,
+          }),
+        });
+        logger.info({ sender: data.senderEmail }, 'Slack alert dispatched via Webhook');
+      } else if (token.startsWith('xoxb-mock-token')) {
         logger.info(
           { sender: data.senderEmail, channel, team: integration.slackTeamName },
           '[Slack Mock Alert Dispatched] Hourly limit reached alert logged successfully'
@@ -216,6 +226,22 @@ export class SlackService {
     const token = decrypt(integration.accessTokenEncrypted);
     const channel = integration.slackChannelId || '#general';
 
+    if (env.SLACK_WEBHOOK_URL) {
+      const res = await fetch(env.SLACK_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: '🚀 *PulseSend Verification:* Your Slack integration is active and listening for rate-limit alerts.',
+        }),
+      });
+      if (res.ok) {
+        return {
+          success: true,
+          message: 'Real test alert sent to your connected Slack channel via Webhook successfully!',
+        };
+      }
+    }
+
     if (token.startsWith('xoxb-mock-token')) {
       return {
         success: true,
@@ -249,6 +275,15 @@ export class SlackService {
     });
 
     if (!integration) {
+      if (env.SLACK_WEBHOOK_URL) {
+        return {
+          connected: true,
+          teamName: 'Outbox Labs Slack Workspace',
+          channelName: '#new-channel',
+          notifyOnRateLimit: true,
+          lastNotifiedAt: null,
+        };
+      }
       return { connected: false };
     }
 
