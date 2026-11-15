@@ -4,8 +4,8 @@ import { logger } from '../utils/logger';
 
 export const esClient = new Client({
   node: env.ELASTICSEARCH_NODE,
-  maxRetries: 0,
-  requestTimeout: 1000,
+  maxRetries: 2,
+  requestTimeout: 10000,
 });
 
 let isElasticsearchConnected = false;
