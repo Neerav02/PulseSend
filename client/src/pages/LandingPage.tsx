@@ -13,6 +13,11 @@ import {
   X,
   ExternalLink,
   ChevronRight,
+  Server,
+  Workflow,
+  Search,
+  Send,
+  CheckCircle2,
 } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
@@ -446,6 +451,233 @@ export const LandingPage: React.FC = () => {
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. SYSTEM ARCHITECTURE & DISTRIBUTED TOPOLOGY */}
+      <section id="architecture" className="py-24 px-6 bg-white border-t border-[#151922]/10 scroll-mt-12">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Heading */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-[12px] font-bold uppercase tracking-wider text-[#FF5733] bg-[#FF5733]/10 px-3.5 py-1 rounded-full border border-[#FF5733]/20">
+              DISTRIBUTED SYSTEM ARCHITECTURE
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-[#151922] tracking-tight mt-4">
+              Fault-Tolerant Distributed Architecture
+            </h2>
+            <p className="text-[#5A6475] text-base sm:text-lg mt-3 leading-relaxed">
+              Engineered with transactional persistence, in-memory delayed timers, atomic Redis Lua rate-limiting, and resilient Elasticsearch clustering.
+            </p>
+          </div>
+
+          {/* 1. VISUAL END-TO-END DATA FLOW PIPELINE */}
+          <div className="bg-[#FAF8F5] border border-[#151922]/15 rounded-3xl p-6 sm:p-10 mb-16 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+            <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#151922]/10">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-[#151922] text-white flex items-center justify-center">
+                  <Workflow size={18} className="text-[#FF5733]" />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-[#151922]">End-to-End Outreach Dispatch Lifecycle</h3>
+                  <p className="text-[12px] text-[#5A6475]">From user submission to verified SMTP delivery and real-time indexing</p>
+                </div>
+              </div>
+              <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Active Distributed Topology
+              </span>
+            </div>
+
+            {/* Pipeline Stage Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+              {/* Stage 1 */}
+              <div className="bg-white border border-[#151922]/10 rounded-2xl p-5 flex flex-col justify-between shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="w-7 h-7 rounded-lg bg-[#151922] text-[#FF5733] font-mono text-xs font-black flex items-center justify-center">
+                      01
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#5A6475] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#151922]/10">
+                      Ingestion
+                    </span>
+                  </div>
+                  <h4 className="text-sm font-bold text-[#151922]">Transactional Outbox</h4>
+                  <p className="text-[12px] text-[#5A6475] leading-relaxed">
+                    Client posts batch to Express REST API. Records commit to <strong>PostgreSQL 16</strong> within an ACID transaction before queue registration, preventing orphaned state.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#151922]/5 text-[11px] font-mono text-[#151922] flex items-center gap-1.5">
+                  <Database size={13} className="text-[#FF5733]" />
+                  <span>status: SCHEDULED</span>
+                </div>
+              </div>
+
+              {/* Stage 2 */}
+              <div className="bg-white border border-[#151922]/10 rounded-2xl p-5 flex flex-col justify-between shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="w-7 h-7 rounded-lg bg-[#151922] text-[#FF5733] font-mono text-xs font-black flex items-center justify-center">
+                      02
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#5A6475] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#151922]/10">
+                      Scheduling
+                    </span>
+                  </div>
+                  <h4 className="text-sm font-bold text-[#151922]">Zero-Cron Redis Timer</h4>
+                  <p className="text-[12px] text-[#5A6475] leading-relaxed">
+                    BullMQ pushes delayed job to <strong>Redis 7</strong> Sorted Set with target epoch score. No polling table scans; precise event wakeups.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#151922]/5 text-[11px] font-mono text-[#151922] flex items-center gap-1.5">
+                  <Clock size={13} className="text-[#FF5733]" />
+                  <span>ZADD delayed timer</span>
+                </div>
+              </div>
+
+              {/* Stage 3 */}
+              <div className="bg-white border border-[#151922]/10 rounded-2xl p-5 flex flex-col justify-between shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="w-7 h-7 rounded-lg bg-[#151922] text-[#FF5733] font-mono text-xs font-black flex items-center justify-center">
+                      03
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#5A6475] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#151922]/10">
+                      Concurrency
+                    </span>
+                  </div>
+                  <h4 className="text-sm font-bold text-[#151922]">Atomic Lua Rate Gate</h4>
+                  <p className="text-[12px] text-[#5A6475] leading-relaxed">
+                    Worker pops job and evaluates atomic Lua script. If sender hourly quota is reached, leads auto-defer to top of next UTC hour and alert Slack.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#151922]/5 text-[11px] font-mono text-[#151922] flex items-center gap-1.5">
+                  <ShieldCheck size={13} className="text-emerald-600" />
+                  <span>EVAL ratelimit.lua</span>
+                </div>
+              </div>
+
+              {/* Stage 4 */}
+              <div className="bg-white border border-[#151922]/10 rounded-2xl p-5 flex flex-col justify-between shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-[#FF5733]/40 transition-all">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="w-7 h-7 rounded-lg bg-[#151922] text-[#FF5733] font-mono text-xs font-black flex items-center justify-center">
+                      04
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#5A6475] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#151922]/10">
+                      Delivery
+                    </span>
+                  </div>
+                  <h4 className="text-sm font-bold text-[#151922]">SMTP & Cluster Search</h4>
+                  <p className="text-[12px] text-[#5A6475] leading-relaxed">
+                    Decrypted AES-256 SMTP transmission with Ethereal preview. Asynchronously indexed in <strong>Elasticsearch 8</strong> with sub-millisecond retrieval.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#151922]/5 text-[11px] font-mono text-[#151922] flex items-center gap-1.5">
+                  <Send size={13} className="text-[#FF5733]" />
+                  <span>250 OK → ES Ingested</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 2. INFRASTRUCTURE & STORAGE MATRIX */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Box 1: Storage Layer */}
+            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col justify-between shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#151922] text-white flex items-center justify-center">
+                    <Database size={20} className="text-[#FF5733]" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-extrabold text-[#151922]">PostgreSQL 16 Cluster</h3>
+                    <span className="text-[11px] font-mono text-[#5A6475]">Port 5433 • ACID Ledger</span>
+                  </div>
+                </div>
+                <p className="text-[13px] text-[#5A6475] leading-relaxed mb-4">
+                  Serves as the durable source of truth. Handles relational tenants, sender accounts, and email states with foreign keys and compound indexes.
+                </p>
+                <ul className="space-y-2 text-[12px] text-[#151922]">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                    <span>Transactional Outbox pattern prevents dual-write corruption</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                    <span>Boot-time reconciliation resets orphaned jobs on crash</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                    <span>AES-256-GCM encrypted SMTP credentials</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Box 2: Queue & Cache Layer */}
+            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col justify-between shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#151922] text-white flex items-center justify-center">
+                    <Server size={20} className="text-[#FF5733]" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-extrabold text-[#151922]">Redis 7 & BullMQ</h3>
+                    <span className="text-[11px] font-mono text-[#5A6475]">Port 6380 • Sorted Sets</span>
+                  </div>
+                </div>
+                <p className="text-[13px] text-[#5A6475] leading-relaxed mb-4">
+                  In-memory distributed coordination engine. Manages millisecond delayed timers, distributed worker locking, and atomic rate enforcement.
+                </p>
+                <ul className="space-y-2 text-[12px] text-[#151922]">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                    <span>5 concurrent worker fleet with graceful shutdown</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                    <span>Atomic Lua sliding-window rate limiting</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                    <span>Zero cron polling overhead with event-driven delay timers</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Box 3: Search & Observability */}
+            <div className="bg-[#FAF8F5] border border-[#151922]/10 rounded-2xl p-7 flex flex-col justify-between shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#151922] text-white flex items-center justify-center">
+                    <Search size={20} className="text-[#FF5733]" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-extrabold text-[#151922]">Elasticsearch 8.14.3</h3>
+                    <span className="text-[11px] font-mono text-[#5A6475]">Port 9200 • Inverted Index</span>
+                  </div>
+                </div>
+                <p className="text-[13px] text-[#5A6475] leading-relaxed mb-4">
+                  Sub-millisecond full-text search indexing across recipients, subjects, and email content with automatic PostgreSQL fallback.
+                </p>
+                <ul className="space-y-2 text-[12px] text-[#151922]">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                    <span>Dedicated <code className="font-mono text-[11px] bg-white px-1 border border-border-soft rounded">pulsesend-emails-v1</code> index</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                    <span>Resilient auto-fallback to SQL ILIKE search</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                    <span>Slack Webhook alerts on delivery & quota events</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
